@@ -19,7 +19,7 @@ const Leads = () => {
 
     const fetchLeads = async () => {
       try {
-        // 1️⃣ Fetch API leads
+        //  Fetch API leads
         const response = await axios.get("https://jsonplaceholder.typicode.com/users");
         const apiLeads = response.data.map((user: any) => ({
           id: user.id,
