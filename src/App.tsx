@@ -4,9 +4,10 @@ import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
-import PrivacyPolicy from "./pages/PrivacyPolicy";
+import PrivacyPolicy from "./pages/Privacy";
 import Terms from "./pages/Terms";
 import Leads from "./pages/Leads";
+import ProductDetail from "./components/ProductDetail";
 
 const App = () => {
   return (
@@ -20,6 +21,8 @@ const App = () => {
           <Route path="/privacy" element={<PrivacyPolicy />} />
           <Route path="/terms" element={<Terms />} />
           <Route path="/leads" element={<Leads />} />
+          <Route path="/product/:title" element={<ProductDetail />} /> {/* Dynamic product route */}
+
         </Routes>
       </main>
       <Footer />

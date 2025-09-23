@@ -195,7 +195,7 @@ const About = () => {
               Get in Touch
             </Link>
          <Link
-  to="/"
+  to="/privacy"
   className="bg-white text-blue-600 px-8 py-4 rounded-lg font-semibold hover:shadow-lg transform hover:scale-105 transition-all duration-300"
 >
   Explore Our Tools

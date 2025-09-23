@@ -1,78 +1,150 @@
 import ProductCard from "../components/ProductCard";
 import { Link } from "react-router-dom";
 
-const products = [
+export const products = [
   {
     title: "CodeAssist AI",
     description: "Intelligent code completion and debugging assistant that learns from your coding patterns.",
     icon: "💻",
-    category: "Development"
+    category: "Development",
+    subServices: [
+      "Context-aware code suggestions",
+      "Debugging assistance",
+      "Syntax error detection",
+      "Code snippet generation"
+    ]
   },
   {
     title: "DataViz Pro",
     description: "Transform complex data into stunning visualizations with AI-powered insights and recommendations.",
     icon: "📊",
-    category: "Analytics"
+    category: "Analytics",
+    subServices: [
+      "Interactive dashboards",
+      "AI-powered chart recommendations",
+      "Real-time data updates",
+      "Export visual reports"
+    ]
   },
   {
     title: "ContentGenius",
     description: "AI-powered content creation tool that generates high-quality articles, social posts, and marketing copy.",
     icon: "✍️",
-    category: "Content"
+    category: "Content",
+    subServices: [
+      "Blog/article generation",
+      "Social media copywriting",
+      "SEO-optimized content",
+      "Multi-language support"
+    ]
   },
   {
     title: "SmartScheduler",
     description: "Intelligent meeting scheduler that optimizes your calendar and suggests optimal time slots.",
     icon: "📅",
-    category: "Productivity"
+    category: "Productivity",
+    subServices: [
+      "Automated meeting suggestions",
+      "Time zone support",
+      "Calendar conflict detection",
+      "Integration with Google/Outlook"
+    ]
   },
   {
     title: "ImageCraft AI",
     description: "Advanced image generation and editing tool powered by cutting-edge AI algorithms.",
     icon: "🎨",
-    category: "Creative"
+    category: "Creative",
+    subServices: [
+      "AI image generation",
+      "Background removal",
+      "Style transfer",
+      "High-res export"
+    ]
   },
   {
     title: "VoiceBot Pro",
     description: "Conversational AI assistant for customer service with natural language processing.",
     icon: "🎤",
-    category: "Communication"
+    category: "Communication",
+    subServices: [
+      "Multi-language support",
+      "24/7 automated responses",
+      "Customer sentiment analysis",
+      "CRM integration"
+    ]
   },
   {
     title: "PredictAI",
     description: "Machine learning platform for predictive analytics and business forecasting.",
     icon: "🔮",
-    category: "Analytics"
+    category: "Analytics",
+    subServices: [
+      "Sales forecasting",
+      "Trend prediction",
+      "Custom ML models",
+      "Data-driven recommendations"
+    ]
   },
   {
     title: "SecureGuard",
     description: "AI-powered cybersecurity tool that detects and prevents threats in real-time.",
     icon: "🛡️",
-    category: "Security"
+    category: "Security",
+    subServices: [
+      "Real-time threat detection",
+      "Malware analysis",
+      "Network security monitoring",
+      "Security alerts & reports"
+    ]
   },
   {
     title: "EduMentor",
     description: "Personalized learning platform that adapts to individual student needs and pace.",
     icon: "🎓",
-    category: "Education"
+    category: "Education",
+    subServices: [
+      "Adaptive learning paths",
+      "Progress tracking",
+      "Personalized quizzes",
+      "Interactive lessons"
+    ]
   },
   {
     title: "HealthAI",
     description: "Medical diagnosis assistant that helps healthcare professionals with accurate assessments.",
     icon: "🏥",
-    category: "Healthcare"
+    category: "Healthcare",
+    subServices: [
+      "Symptom analysis",
+      "Predictive diagnosis",
+      "Treatment suggestions",
+      "Patient monitoring integration"
+    ]
   },
   {
     title: "FinanceWise",
     description: "AI-driven financial planning and investment recommendation system.",
     icon: "💰",
-    category: "Finance"
+    category: "Finance",
+    subServices: [
+      "Investment portfolio suggestions",
+      "Risk assessment",
+      "Expense tracking",
+      "Financial forecasting"
+    ]
   },
   {
     title: "EcoTracker",
     description: "Environmental monitoring tool that tracks carbon footprint and suggests sustainability improvements.",
     icon: "🌱",
-    category: "Environment"
+    category: "Environment",
+    subServices: [
+      "Carbon footprint tracking",
+      "Sustainability recommendations",
+      "Environmental reporting",
+      "Energy consumption analysis"
+    ]
   }
 ];
 
@@ -91,16 +163,20 @@ const Home = () => {
               Discover cutting-edge AI tools designed to boost productivity, streamline operations, and unlock new possibilities for your business.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
-          <Link
-  to="/contact"
-  className="bg-gradient-to-r from-blue-700 to-indigo-700 text-white px-8 py-4 rounded-lg font-semibold hover:shadow-lg hover:scale-105 transition-all duration-300 inline-block text-center"
+              <Link
+                to="/contact"
+                className="bg-gradient-to-r from-blue-700 to-indigo-700 text-white px-8 py-4 rounded-lg font-semibold hover:shadow-lg hover:scale-105 transition-all duration-300 inline-block text-center"
+              >
+                <span className="text-white">Get Started Free</span>
+              </Link>
+
+<Link
+  to="./About"
+  className="border-2 border-gray-300 text-gray-700 px-8 py-4 rounded-lg font-semibold hover:border-blue-600 hover:text-blue-600 transition-all duration-300 inline-block text-center"
 >
-  <span className="text-white">Get Started Free</span>
+  Learn More
 </Link>
 
-              <button className="border-2 border-gray-300 text-gray-700 px-8 py-4 rounded-lg font-semibold hover:border-blue-600 hover:text-blue-600 transition-all duration-300">
-                Learn More
-              </button>
             </div>
           </div>
         </div>
@@ -158,9 +234,10 @@ const Home = () => {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {products.map((product, idx) => (
-              <div
+              <Link
+                to={`/product/${encodeURIComponent(product.title)}`}
                 key={idx}
-                className="animate-fade-in-up"
+                className="block animate-fade-in-up"
                 style={{ animationDelay: `${idx * 0.1}s` }}
               >
                 <ProductCard
@@ -169,7 +246,7 @@ const Home = () => {
                   icon={product.icon}
                   category={product.category}
                 />
-              </div>
+              </Link>
             ))}
           </div>
         </div>
