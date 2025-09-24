@@ -1,9 +1,11 @@
 import { Link } from "react-router-dom";
+import { useTheme } from "../theme/ThemeProvider";
 
 const About = () => {
+  const { theme } = useTheme();
   const stats = [
-    { number: "10,000+", label: "Active Users" },
-    { number: "500+", label: "Companies" },
+    { number: "10,0000+", label: "Active Users" },
+    { number: "5000+", label: "Companies" },
     { number: "99.9%", label: "Uptime" },
     { number: "24/7", label: "Support" }
   ];
@@ -190,13 +192,15 @@ const About = () => {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               to="/contact"
-              className="bg-white text-blue-600 px-8 py-4 rounded-lg font-semibold hover:shadow-lg transform hover:scale-105 transition-all duration-300"
+              style={{ background: `linear-gradient(to r, ${theme.colors.accent}, ${theme.colors.text})`, color: theme.colors.text, border: `2px solid ${theme.colors.accent}` }}
+              className="px-8 py-4 rounded-lg font-semibold hover:shadow-lg transform hover:scale-105 transition-all duration-300"
             >
               Get in Touch
             </Link>
          <Link
   to="/privacy"
-  className="bg-white text-blue-600 px-8 py-4 rounded-lg font-semibold hover:shadow-lg transform hover:scale-105 transition-all duration-300"
+  style={{ background: `linear-gradient(to r, ${theme.colors.accent}, ${theme.colors.text})`, color: theme.colors.text, border: `2px solid ${theme.colors.accent}` }}
+  className="px-8 py-4 rounded-lg font-semibold hover:shadow-lg transform hover:scale-105 transition-all duration-300"
 >
   Explore Our Tools
 </Link>

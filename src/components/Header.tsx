@@ -1,11 +1,13 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import { useTheme } from "../theme/ThemeProvider";
 
 const Header = () => {
+  const { theme } = useTheme();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <header className="bg-white shadow-lg sticky top-0 z-50 border-b border-gray-100">
+    <header style={{ backgroundColor: theme.colors.bg, boxShadow: theme.effects.cardShadow, borderBottom: `1px solid ${theme.colors.text}20` }} className="sticky top-0 z-50">
       <div className="container mx-auto px-6 py-4">
         <div className="flex justify-between items-center">
           {/* Logo */}
@@ -26,8 +28,8 @@ const Header = () => {
               </svg>
             </div>
             <div>
-              <h1 className="text-2xl font-bold text-gray-900">AIForge</h1>
-              <p className="text-xs text-gray-500 -mt-1">AI Solutions</p>
+              <h1 style={{ color: theme.colors.text }} className="text-2xl font-bold">AIForge</h1>
+              <p style={{ color: theme.colors.text }} className="text-xs -mt-1">AI Solutions</p>
             </div>
           </Link>
 
@@ -35,55 +37,63 @@ const Header = () => {
           <nav className="hidden md:flex space-x-8">
             <Link
               to="/"
-              className="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-300 relative group"
+              style={{ color: theme.colors.text }}
+              className="font-medium transition-colors duration-300 relative group"
             >
               Home
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-600 group-hover:w-full transition-all duration-300"></span>
+              <span style={{ backgroundColor: theme.colors.accent }} className="absolute -bottom-1 left-0 w-0 h-0.5 group-hover:w-full transition-all duration-300"></span>
             </Link>
             <Link
               to="/about"
-              className="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-300 relative group"
+              style={{ color: theme.colors.text }}
+              className="font-medium transition-colors duration-300 relative group"
             >
               About
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-600 group-hover:w-full transition-all duration-300"></span>
+              <span style={{ backgroundColor: theme.colors.accent }} className="absolute -bottom-1 left-0 w-0 h-0.5 group-hover:w-full transition-all duration-300"></span>
             </Link>
             <Link
               to="/contact"
-              className="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-300 relative group"
+              style={{ color: theme.colors.text }}
+              className="font-medium transition-colors duration-300 relative group"
             >
               Contact
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-600 group-hover:w-full transition-all duration-300"></span>
+              <span style={{ backgroundColor: theme.colors.accent }} className="absolute -bottom-1 left-0 w-0 h-0.5 group-hover:w-full transition-all duration-300"></span>
             </Link>
             <Link
               to="/terms"
-              className="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-300 relative group"
+              style={{ color: theme.colors.text }}
+              className="font-medium transition-colors duration-300 relative group"
             >
               Terms
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-600 group-hover:w-full transition-all duration-300"></span>
+              <span style={{ backgroundColor: theme.colors.accent }} className="absolute -bottom-1 left-0 w-0 h-0.5 group-hover:w-full transition-all duration-300"></span>
             </Link>
             <Link
               to="/privacy"
-              className="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-300 relative group"
+              style={{ color: theme.colors.text }}
+              className="font-medium transition-colors duration-300 relative group"
             >
               Privacy
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-600 group-hover:w-full transition-all duration-300"></span>
+              <span style={{ backgroundColor: theme.colors.accent }} className="absolute -bottom-1 left-0 w-0 h-0.5 group-hover:w-full transition-all duration-300"></span>
             </Link>
             <Link
               to="/leads"
-              className="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-300 relative group"
+              style={{ color: theme.colors.text }}
+              className="font-medium transition-colors duration-300 relative group"
             >
               Leads
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-600 group-hover:w-full transition-all duration-300"></span>
+              <span style={{ backgroundColor: theme.colors.accent }} className="absolute -bottom-1 left-0 w-0 h-0.5 group-hover:w-full transition-all duration-300"></span>
             </Link>
           </nav>
 
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors duration-300"
+            style={{ backgroundColor: theme.colors.text + '20' }}
+            className="md:hidden p-2 rounded-lg transition-colors duration-300"
           >
             <svg
-              className="w-6 h-6 text-gray-700"
+              style={{ color: theme.colors.text }}
+              className="w-6 h-6"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -99,46 +109,52 @@ const Header = () => {
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="md:hidden mt-4 pb-4 border-t border-gray-100 animate-fade-in">
+          <div style={{ borderTop: `1px solid ${theme.colors.text}20` }} className="md:hidden mt-4 pb-4 animate-fade-in">
             <nav className="flex flex-col space-y-4 pt-4">
               <Link
                 to="/"
-                className="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-300"
+                style={{ color: theme.colors.text }}
+                className="font-medium transition-colors duration-300"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Home
               </Link>
               <Link
                 to="/about"
-                className="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-300"
+                style={{ color: theme.colors.text }}
+                className="font-medium transition-colors duration-300"
                 onClick={() => setIsMenuOpen(false)}
               >
                 About
               </Link>
               <Link
                 to="/contact"
-                className="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-300"
+                style={{ color: theme.colors.text }}
+                className="font-medium transition-colors duration-300"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Contact
               </Link>
               <Link
                 to="/terms"
-                className="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-300"
+                style={{ color: theme.colors.text }}
+                className="font-medium transition-colors duration-300"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Terms
               </Link>
               <Link
                 to="/privacy"
-                className="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-300"
+                style={{ color: theme.colors.text }}
+                className="font-medium transition-colors duration-300"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Privacy
               </Link>
               <Link
                 to="/leads"
-                className="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-300"
+                style={{ color: theme.colors.text }}
+                className="font-medium transition-colors duration-300"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Leads

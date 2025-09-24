@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTheme } from "../theme/ThemeProvider";
 
 interface FormData {
   name: string;
@@ -8,6 +9,7 @@ interface FormData {
 }
 
 const BuyForm = () => {
+  const { theme } = useTheme();
   const [form, setForm] = useState<FormData>({
     name: "",
     email: "",
@@ -95,7 +97,8 @@ const BuyForm = () => {
           </div>
           <button
             type="submit"
-            className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-lg font-medium hover:shadow-lg hover:scale-105 transition-all duration-300"
+            style={{ background: `linear-gradient(to r, ${theme.colors.accent}, ${theme.colors.text})`, color: theme.colors.text, border: `2px solid ${theme.colors.accent}` }}
+            className="w-full px-6 py-3 rounded-lg font-medium hover:shadow-lg hover:scale-105 transition-all duration-300"
           >
             Submit
           </button>

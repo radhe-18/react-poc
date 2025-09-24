@@ -1,5 +1,6 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { useTheme } from "../theme/ThemeProvider";
 import { toolsData } from "../toolsData"; // Your mock data
 
 type ProductApiData = typeof toolsData[0];
@@ -7,6 +8,7 @@ type ProductApiData = typeof toolsData[0];
 const ProductDetail = () => {
   const { title } = useParams<{ title: string }>();
   const navigate = useNavigate();
+  const { theme } = useTheme();
   const [data, setData] = useState<ProductApiData | null>(null);
 
   useEffect(() => {
@@ -45,7 +47,8 @@ const ProductDetail = () => {
             )}
             <button
               onClick={() => navigate(`/buy/${encodeURIComponent(data.title)}`)}
-              className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-lg font-medium hover:shadow-lg hover:scale-105 transition-all duration-300"
+              style={{ background: `linear-gradient(to r, ${theme.colors.accent}, ${theme.colors.text})`, color: theme.colors.text, border: `2px solid ${theme.colors.accent}` }}
+              className="px-6 py-3 rounded-lg font-medium hover:shadow-lg hover:scale-105 transition-all duration-300"
             >
               Buy Now
             </button>

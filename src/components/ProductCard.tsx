@@ -1,3 +1,5 @@
+import { useTheme } from "../theme/ThemeProvider";
+
 type ProductCardProps = {
   title: string;
   description: string;
@@ -6,6 +8,7 @@ type ProductCardProps = {
 };
 
 const ProductCard = ({ title, description, icon, category }: ProductCardProps) => {
+  const { theme } = useTheme();
   return (
     <div className="bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-xl hover:scale-105 transition-all duration-300 ease-in-out cursor-pointer group overflow-hidden">
       <div className="p-6">
@@ -24,7 +27,7 @@ const ProductCard = ({ title, description, icon, category }: ProductCardProps) =
           {description}
         </p>
         <div className="mt-6 flex justify-between items-center">
-          <button className="bg-gradient-to-r from-blue-600 to-purple-600 !text-white px-4 py-2 rounded-lg font-medium hover:shadow-lg transform hover:scale-105 transition-all duration-300 opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0">
+          <button style={{ background: `linear-gradient(to r, ${theme.colors.accent}, ${theme.colors.text})`, color: theme.colors.text, border: `2px solid ${theme.colors.accent}` }} className="px-4 py-2 rounded-lg font-medium hover:shadow-lg transform hover:scale-105 transition-all duration-300 opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0">
             Learn More
           </button>
           <svg
