@@ -47,7 +47,7 @@ const Leads = () => {
     // Listen for new submissions
     const handleLeadsUpdate = () => {
       const storedLeads = JSON.parse(localStorage.getItem("leads") || "[]");
-      setLeads(prev => [...storedLeads]); // update state immediately
+      setLeads([...storedLeads]); // update state immediately
     };
 
     window.addEventListener("leadsUpdated", handleLeadsUpdate);

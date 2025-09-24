@@ -172,7 +172,7 @@ const Home = () => {
 
 <Link
   to="./About"
-  className="border-2 border-gray-300 text-gray-700 px-8 py-4 rounded-lg font-semibold hover:border-blue-600 hover:text-blue-600 transition-all duration-300 inline-block text-center"
+  className="border-2 border-gray-300 text-white px-8 py-4 rounded-lg font-semibold hover:border-blue-600 hover:text-blue-600 transition-all duration-300 inline-block text-center"
 >
   Learn More
 </Link>

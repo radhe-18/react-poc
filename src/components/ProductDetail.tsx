@@ -1,35 +1,60 @@
 import { useParams } from "react-router-dom";
-import { products } from "../pages/Home";
+import { useEffect, useState } from "react";
+import { toolsData } from "../toolsData"; // import your mock data
+
+type ProductApiData = typeof toolsData[0];
 
 const ProductDetail = () => {
   const { title } = useParams<{ title: string }>();
-  const product = products.find(p => p.title === decodeURIComponent(title || ""));
+  const [data, setData] = useState<ProductApiData | null>(null);
 
-  if (!product) {
+ useEffect(() => {
+  const tool = toolsData.find((t) => t.title === title);
+  setData(tool || null);
+}, [title]);
+
+  if (!data) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <p className="text-gray-600 text-lg">Product not found.</p>
+        <p className="text-gray-600 text-lg">No product data found.</p>
       </div>
     );
   }
 
   return (
     <div className="min-h-screen py-16 px-6 bg-gray-50">
-      <div className="max-w-3xl mx-auto bg-white rounded-2xl shadow-lg p-8 text-center">
-        <div className="text-6xl mb-4">{product.icon}</div>
-        <h1 className="text-4xl font-bold text-gray-900 mb-4">{product.title}</h1>
-        <p className="text-gray-700 mb-6">{product.description}</p>
-        <p className="text-gray-500 text-sm mb-6">Category: {product.category}</p>
+      <div className="max-w-4xl mx-auto bg-white rounded-2xl shadow-lg p-8">
+        {/* Image + Info */}
+        <div className="flex flex-col md:flex-row gap-8 items-center">
+          <img
+            src={data.image}
+            alt={data.title}
+            className="w-64 h-64 object-contain rounded-lg border"
+          />
+          <div className="text-left">
+            <h1 className="text-4xl font-bold text-gray-900 mb-4">{data.title}</h1>
+            <p className="text-xl text-blue-600 font-semibold mb-2">
+              ${data.price}
+            </p>
+            <p className="text-gray-500 text-sm mb-2">
+              Category: <span className="capitalize">{data.category}</span>
+            </p>
+            {data.rating && (
+              <p className="text-yellow-600 font-medium mb-4">
+                ⭐ {data.rating.rate} / 5 ({data.rating.count} reviews)
+              </p>
+            )}
+            <button className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-lg font-medium hover:shadow-lg hover:scale-105 transition-all duration-300">
+              Buy Now
+            </button>
+          </div>
+        </div>
 
-        <h2 className="text-2xl font-semibold text-gray-900 mb-4">Key Features</h2>
-        <ul className="text-left max-w-md mx-auto space-y-3">
-          {product.subServices.map((service, idx) => (
-            <li key={idx} className="flex items-center gap-3">
-              <span className="bg-blue-100 text-blue-600 px-2 py-1 rounded-full text-sm">✔</span>
-              {service}
-            </li>
-          ))}
-        </ul>
+        {/* Description */}
+        <div className="mt-10">
+          <h2 className="text-2xl font-semibold mb-4">Description</h2>
+          <p className="text-gray-700 leading-relaxed">{data.description}</p>
+        </div>
       </div>
     </div>
   );
