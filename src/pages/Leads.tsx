@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-interface Lead {
+export interface Lead {
   id: number;
   name: string;
   email: string;
   company?: string;
   message: string;
   timestamp?: string;
+  source?: string; // "Buy Product Form" | "Contact Form" | "API"
 }
 
 const Leads = () => {
@@ -19,21 +20,22 @@ const Leads = () => {
 
     const fetchLeads = async () => {
       try {
-        //  Fetch API leads
+        // Fetch API leads
         const response = await axios.get("https://jsonplaceholder.typicode.com/users");
-        const apiLeads = response.data.map((user: any) => ({
+        const apiLeads: Lead[] = response.data.map((user: any) => ({
           id: user.id,
           name: user.name,
           email: user.email,
           company: user.company?.name || "-",
           message: `Hi, I am ${user.name}.`,
           timestamp: new Date().toISOString(),
+          source: "API",
         }));
 
-        // 2️⃣ Get localStorage leads
-        const storedLeads = JSON.parse(localStorage.getItem("leads") || "[]");
+        // Get localStorage leads (Buy Form + Contact Form)
+        const storedLeads: Lead[] = JSON.parse(localStorage.getItem("leads") || "[]");
 
-        // 3️⃣ Merge and set state
+        // Merge API + local storage
         setLeads([...storedLeads, ...apiLeads]);
       } catch (error) {
         console.error("Error fetching leads:", error);
@@ -46,8 +48,8 @@ const Leads = () => {
 
     // Listen for new submissions
     const handleLeadsUpdate = () => {
-      const storedLeads = JSON.parse(localStorage.getItem("leads") || "[]");
-      setLeads([...storedLeads]); // update state immediately
+      const storedLeads: Lead[] = JSON.parse(localStorage.getItem("leads") || "[]");
+      setLeads(storedLeads);
     };
 
     window.addEventListener("leadsUpdated", handleLeadsUpdate);
@@ -63,11 +65,11 @@ const Leads = () => {
   }
 
   return (
-    <div className="min-h-screen">
-      <div className="container mx-auto py-8 px-6">
+    <div className="min-h-screen bg-gray-50">
+      <div className="container mx-auto py-8 px-4">
         <div className="mb-8">
           <h2 className="text-3xl font-bold text-gray-900 mb-2">Registered Leads</h2>
-          <p className="text-gray-600">Manage and view all contact form submissions</p>
+          <p className="text-gray-600">Manage and view all contact and product form submissions</p>
         </div>
 
         {leads.length === 0 ? (
@@ -77,29 +79,47 @@ const Leads = () => {
             <p className="text-gray-600">Leads will appear here once users submit them.</p>
           </div>
         ) : (
-          <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+          <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-x-auto">
             <div className="px-6 py-4 border-b border-gray-200 bg-gray-50">
               <h3 className="text-lg font-semibold text-gray-900">Total Leads: {leads.length}</h3>
             </div>
             <div className="overflow-x-auto">
-              <table className="min-w-full divide-y divide-gray-200">
+              <table className="min-w-full divide-y divide-gray-200 table-auto">
                 <thead className="bg-gray-50">
                   <tr>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Company</th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Message</th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Submitted At</th>
+                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
+                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
+                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Company</th>
+                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Message</th>
+                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Submitted At</th>
+                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Source</th>
                   </tr>
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
                   {leads.map((lead) => (
                     <tr key={lead.id} className="hover:bg-gray-50">
-                      <td className="px-6 py-4 whitespace-nowrap">{lead.name}</td>
-                      <td className="px-6 py-4 whitespace-nowrap">{lead.email}</td>
-                      <td className="px-6 py-4 whitespace-nowrap">{lead.company || "-"}</td>
-                      <td className="px-6 py-4 truncate max-w-xs" title={lead.message}>{lead.message}</td>
-                      <td className="px-6 py-4 whitespace-nowrap">{lead.timestamp ? new Date(lead.timestamp).toLocaleString() : "N/A"}</td>
+                      <td className="px-4 py-3 whitespace-nowrap">{lead.name}</td>
+                      <td className="px-4 py-3 whitespace-nowrap">{lead.email}</td>
+                      <td className="px-4 py-3 whitespace-nowrap">{lead.company || "-"}</td>
+                      <td className="px-4 py-3 truncate max-w-xs" title={lead.message}>{lead.message}</td>
+                      <td className="px-4 py-3 whitespace-nowrap">{lead.timestamp ? new Date(lead.timestamp).toLocaleString() : "N/A"}</td>
+                      <td className="px-4 py-3 whitespace-nowrap">
+                        {lead.source === "Buy Product Form" && (
+                          <span className="inline-block bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs font-semibold">
+                            🛒 Buy Form
+                          </span>
+                        )}
+                        {lead.source === "Contact Form" && (
+                          <span className="inline-block bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full text-xs font-semibold">
+                            📄 Contact Form
+                          </span>
+                        )}
+                        {lead.source === "API" && (
+                          <span className="inline-block bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs font-semibold">
+                            API
+                          </span>
+                        )}
+                      </td>
                     </tr>
                   ))}
                 </tbody>

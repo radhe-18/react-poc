@@ -1,21 +1,22 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { toolsData } from "../toolsData"; // import your mock data
+import { toolsData } from "../toolsData"; // Your mock data
 
 type ProductApiData = typeof toolsData[0];
 
 const ProductDetail = () => {
   const { title } = useParams<{ title: string }>();
+  const navigate = useNavigate();
   const [data, setData] = useState<ProductApiData | null>(null);
 
- useEffect(() => {
-  const tool = toolsData.find((t) => t.title === title);
-  setData(tool || null);
-}, [title]);
+  useEffect(() => {
+    const tool = toolsData.find((t) => t.title === title);
+    setData(tool || null);
+  }, [title]);
 
   if (!data) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
         <p className="text-gray-600 text-lg">No product data found.</p>
       </div>
     );
@@ -33,9 +34,7 @@ const ProductDetail = () => {
           />
           <div className="text-left">
             <h1 className="text-4xl font-bold text-gray-900 mb-4">{data.title}</h1>
-            <p className="text-xl text-blue-600 font-semibold mb-2">
-              ${data.price}
-            </p>
+            <p className="text-xl text-blue-600 font-semibold mb-2">${data.price}</p>
             <p className="text-gray-500 text-sm mb-2">
               Category: <span className="capitalize">{data.category}</span>
             </p>
@@ -44,7 +43,10 @@ const ProductDetail = () => {
                 ⭐ {data.rating.rate} / 5 ({data.rating.count} reviews)
               </p>
             )}
-            <button className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-lg font-medium hover:shadow-lg hover:scale-105 transition-all duration-300">
+            <button
+              onClick={() => navigate(`/buy/${encodeURIComponent(data.title)}`)}
+              className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-lg font-medium hover:shadow-lg hover:scale-105 transition-all duration-300"
+            >
               Buy Now
             </button>
           </div>

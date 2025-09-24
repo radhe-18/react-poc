@@ -9,6 +9,7 @@ import PrivacyPolicy from "./pages/Privacy";
 import Terms from "./pages/Terms";
 import Leads from "./pages/Leads";
 import ProductDetail from "./components/ProductDetail";
+import BuyForm from "./pages/BuyForm";
 
 const App = () => {
   return (
@@ -24,7 +25,7 @@ const App = () => {
           <Route path="/terms" element={<Terms />} />
           <Route path="/leads" element={<Leads />} />
           <Route path="/product/:title" element={<ProductDetail />} /> {/* Dynamic product route */}
-
+<Route path="/buy/:title" element={<BuyForm />} />
         </Routes>
       </main>
       <Footer />

@@ -23,20 +23,23 @@ const Contact = () => {
     setIsSubmitting(true);
 
     try {
-      // Save to localStorage
+      // Save to localStorage with source
       const leads = JSON.parse(localStorage.getItem("leads") || "[]");
       const newLead = {
         id: Date.now(),
         ...formData,
         timestamp: new Date().toISOString(),
+        source: "Contact Form", // <-- added
       };
       leads.push(newLead);
       localStorage.setItem("leads", JSON.stringify(leads));
 
+      // Trigger custom event so Leads page can update in real-time
+      window.dispatchEvent(new Event("leadsUpdated"));
+
       setSubmitMessage("Thank you for your message! We'll get back to you within 24 hours.");
       setFormData({ name: "", email: "", company: "", message: "" });
 
-      // Clear success message after 5 seconds
       setTimeout(() => setSubmitMessage(""), 5000);
     } catch (error) {
       setSubmitMessage("Something went wrong. Please try again.");
@@ -67,6 +70,7 @@ const Contact = () => {
         <div className="container mx-auto px-6">
           <div className="max-w-6xl mx-auto">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+
               {/* Contact Info */}
               <div className="animate-fade-in-up">
                 <h2 className="text-3xl font-bold text-gray-900 mb-6">Let's Start a Conversation</h2>
@@ -74,8 +78,8 @@ const Contact = () => {
                   Whether you're looking to implement AI solutions, have questions about our tools,
                   or want to explore partnership opportunities, we're here to help.
                 </p>
-
                 <div className="space-y-6">
+                  {/* Email */}
                   <div className="flex items-start space-x-4">
                     <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
                       <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -88,7 +92,7 @@ const Contact = () => {
                       <p className="text-gray-600">support@aiforge.com</p>
                     </div>
                   </div>
-
+                  {/* Call */}
                   <div className="flex items-start space-x-4">
                     <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center flex-shrink-0">
                       <svg className="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -101,7 +105,7 @@ const Contact = () => {
                       <p className="text-gray-600">Mon-Fri 9AM-6PM EST</p>
                     </div>
                   </div>
-
+                  {/* Visit */}
                   <div className="flex items-start space-x-4">
                     <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center flex-shrink-0">
                       <svg className="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -131,73 +135,22 @@ const Contact = () => {
 
                   <form onSubmit={handleSubmit} className="space-y-6">
                     <div>
-                      <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
-                        Full Name *
-                      </label>
-                      <input
-                        type="text"
-                        id="name"
-                        name="name"
-                        value={formData.name}
-                        onChange={handleChange}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
-                        placeholder="Your full name"
-                        required
-                      />
+                      <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">Full Name *</label>
+                      <input type="text" id="name" name="name" value={formData.name} onChange={handleChange} className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300" placeholder="Your full name" required />
                     </div>
-
                     <div>
-                      <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-                        Email Address *
-                      </label>
-                      <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
-                        placeholder="your@email.com"
-                        required
-                      />
+                      <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">Email Address *</label>
+                      <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300" placeholder="your@email.com" required />
                     </div>
-
                     <div>
-                      <label htmlFor="company" className="block text-sm font-medium text-gray-700 mb-2">
-                        Company (Optional)
-                      </label>
-                      <input
-                        type="text"
-                        id="company"
-                        name="company"
-                        value={formData.company}
-                        onChange={handleChange}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
-                        placeholder="Your company name"
-                      />
+                      <label htmlFor="company" className="block text-sm font-medium text-gray-700 mb-2">Company (Optional)</label>
+                      <input type="text" id="company" name="company" value={formData.company} onChange={handleChange} className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300" placeholder="Your company name" />
                     </div>
-
                     <div>
-                      <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
-                        Message *
-                      </label>
-                      <textarea
-                        id="message"
-                        name="message"
-                        value={formData.message}
-                        onChange={handleChange}
-                        rows={5}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 resize-none"
-                        placeholder="Tell us about your project or ask us anything..."
-                        required
-                      />
+                      <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">Message *</label>
+                      <textarea id="message" name="message" value={formData.message} onChange={handleChange} rows={5} className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 resize-none" placeholder="Tell us about your project or ask us anything..." required />
                     </div>
-
-                    <button
-                      type="submit"
-                      disabled={isSubmitting}
-                      className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-4 px-6 rounded-lg font-semibold hover:shadow-lg transform hover:scale-105 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
-                    >
+                    <button type="submit" disabled={isSubmitting} className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-4 px-6 rounded-lg font-semibold hover:shadow-lg transform hover:scale-105 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none">
                       {isSubmitting ? (
                         <div className="flex items-center justify-center">
                           <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -206,13 +159,12 @@ const Contact = () => {
                           </svg>
                           Sending...
                         </div>
-                      ) : (
-                        "Send Message"
-                      )}
+                      ) : "Send Message"}
                     </button>
                   </form>
                 </div>
               </div>
+
             </div>
           </div>
         </div>
