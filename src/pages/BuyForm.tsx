@@ -100,21 +100,6 @@ const BuyForm = () => {
             Submit
           </button>
         </form>
-
-        {/* Optional section: Show all Buy Form submissions */}
-        <div className="mt-10">
-          <h3 className="text-lg font-semibold text-gray-900 mb-2">Buy Form Submissions:</h3>
-          <ul className="space-y-2 max-h-64 overflow-y-auto">
-            {JSON.parse(localStorage.getItem("leads") || "[]")
-              .filter((lead: any) => lead.source === "Buy Product Form")
-              .map((lead: any) => (
-                <li key={lead.id} className="border-b border-gray-200 py-2 text-gray-700">
-                  <strong>{lead.name}</strong> ({lead.email}) — {lead.company || "-"} <br />
-                  <span className="text-gray-500 text-sm">{lead.message}</span>
-                </li>
-              ))}
-          </ul>
-        </div>
       </div>
     </div>
   );
