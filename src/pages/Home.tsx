@@ -267,10 +267,10 @@ const Home = () => {
           </p>
           <Link
             to="/contact"
-            style={{ backgroundColor: theme.colors.bg, color: theme.colors.accent, border: `2px solid ${theme.colors.accent}` }}
-            className="px-8 py-4 rounded-lg font-semibold hover:shadow-lg transform hover:scale-105 transition-all duration-300"
+            style={{ background: `linear-gradient(to r, ${theme.colors.accent}, ${theme.colors.text})`, color: theme.colors.text, border: `2px solid ${theme.colors.accent}` }}
+            className="px-8 py-4 rounded-lg font-semibold hover:shadow-lg hover:scale-105 transition-all duration-300 inline-block text-center"
           >
-            Start Your Free Trial
+            <span style={{ color: theme.colors.text }}>Start Your Free Trial</span>
           </Link>
         </div>
       </section>
