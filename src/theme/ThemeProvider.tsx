@@ -17,6 +17,7 @@ export const useTheme = () => useContext(ThemeContext);
 
 export const ThemeProvider = ({ children }: { children: ReactNode }) => {
   const [theme, setTheme] = useState<Theme>(themes.day);
+console.log(theme,"themethemethemetheme");
 
   const setThemeByName = (name: keyof typeof themes) => {
     setTheme(themes[name]);

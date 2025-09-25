@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { useTheme } from "../theme/ThemeProvider";
 import { themes } from "../theme/Theme";
-
+import "../index.css"
 const ThemeSwitcher = () => {
   const { setThemeByName } = useTheme();
   const [isOpen, setIsOpen] = useState(false);
+console.log(setThemeByName,"setThemeByNamesetThemeByNamesetThemeByName");
 
   const handleThemeChange = (themeName: keyof typeof themes) => {
     setThemeByName(themeName);
@@ -23,34 +24,35 @@ const ThemeSwitcher = () => {
       </button>
 
       {/* Theme Options */}
-      {isOpen && (
-        <div className="absolute bottom-14 right-0 bg-white dark:bg-gray-800 rounded-lg shadow-xl p-3 space-y-1 min-w-28 border border-gray-200 dark:border-gray-700">
-          <button
-            onClick={() => handleThemeChange("day")}
-            className="w-full text-left px-2 py-1 rounded text-sm hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
-          >
-            ☀️ Day
-          </button>
-          <button
-            onClick={() => handleThemeChange("dark")}
-            className="w-full text-left px-2 py-1 rounded text-sm hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
-          >
-            🌙 Dark
-          </button>
-          <button
-            onClick={() => handleThemeChange("gaming")}
-            className="w-full text-left px-2 py-1 rounded text-sm hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
-          >
-            🎮 Gaming
-          </button>
-          <button
-            onClick={() => handleThemeChange("futuristic")}
-            className="w-full text-left px-2 py-1 rounded text-sm hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
-          >
-            🚀 Futuristic
-          </button>
-        </div>
-      )}
+     {isOpen && (
+  <div className="theme-popup absolute bottom-14 right-0 rounded-lg shadow-xl p-3 space-y-1 min-w-28">
+    <button
+      onClick={() => handleThemeChange("day")}
+      className="w-full text-left px-2 py-1 rounded text-sm transition-colors hover:opacity-80"
+    >
+      ☀️ Day
+    </button>
+    <button
+      onClick={() => handleThemeChange("dark")}
+      className="w-full text-left px-2 py-1 rounded text-sm transition-colors hover:opacity-80"
+    >
+      🌙 Dark
+    </button>
+    <button
+      onClick={() => handleThemeChange("gaming")}
+      className="w-full text-left px-2 py-1 rounded text-sm transition-colors hover:opacity-80"
+    >
+      🎮 Gaming
+    </button>
+    <button
+      onClick={() => handleThemeChange("futuristic")}
+      className="w-full text-left px-2 py-1 rounded text-sm transition-colors hover:opacity-80"
+    >
+      🚀 Futuristic
+    </button>
+  </div>
+)}
+
     </div>
   );
 };

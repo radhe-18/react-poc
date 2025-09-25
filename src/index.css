@@ -125,8 +125,8 @@ html.day {
 
 /* Dark Mode */
 html.dark {
-  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-  color: #f1f5f9;
+  background: linear-gradient(135deg, #111827 0%, #1f2937 100%); /* Tailwind gray-900 → gray-800 */
+  color: #f9fafb; /* almost white text */
   font-family: 'Inter', sans-serif;
 }
 
@@ -137,6 +137,7 @@ html.gaming {
   font-family: 'Orbitron', sans-serif;
   animation: subtle-pulse 3s ease-in-out infinite;
 }
+
 @keyframes subtle-pulse {
   0%, 100% { opacity: 1; }
   50% { opacity: 0.95; }
@@ -149,6 +150,33 @@ html.futuristic {
   font-family: 'Rajdhani', sans-serif;
   animation: subtle-glow 2s ease-in-out infinite alternate;
 }
+
+
+/* ThemeSwitcher Popup */
+html.day .theme-popup {
+  background: #ffffff;
+  color: #1e293b;
+  border: 1px solid #e2e8f0;
+}
+
+html.dark .theme-popup {
+  background: #dc2626; /* red-600 */
+  color: #000000;
+  border: 1px solid #991b1b; /* red-800 */
+}
+
+html.gaming .theme-popup {
+  background: #0f0f1a;
+  color: #00ffcc;
+  border: 1px solid #00ff88;
+}
+
+html.futuristic .theme-popup {
+  background: #0d1421;
+  color: #00d4ff;
+  border: 1px solid #1a2332;
+}
+
 @keyframes subtle-glow {
   from { filter: brightness(1); }
   to { filter: brightness(1.05); }
