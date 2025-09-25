@@ -114,30 +114,30 @@ const PrivacyPolicy = () => {
             </section>
 
             {/* 6. Changes to This Policy */}
-            <section className="bg-white rounded-lg shadow-sm border border-gray-200 p-8">
-              <h2 className="text-2xl font-bold text-gray-900 mb-4 flex items-center">
-                <span className="flex-shrink-0 w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-bold mr-3">6</span>
+            <section style={{ backgroundColor: theme.colors.card }} className="rounded-lg shadow-sm border border-gray-200 p-8">
+              <h2 style={{ color: theme.colors.text }} className="text-2xl font-bold mb-4 flex items-center">
+                <span style={{ backgroundColor: theme.colors.accent }} className="flex-shrink-0 w-8 h-8 text-white rounded-full flex items-center justify-center text-sm font-bold mr-3">6</span>
                 Changes to This Policy
               </h2>
-              <p className="text-gray-700 leading-relaxed mb-2">
+              <p style={{ color: theme.colors.text + '80' }} className="leading-relaxed mb-2">
                 We may update this Privacy Policy periodically to reflect changes in our practices or legal requirements.
               </p>
-              <p className="text-gray-700 leading-relaxed">
+              <p style={{ color: theme.colors.text + '80' }} className="leading-relaxed">
                 Updates will be posted on this page, and the “Last Updated” date will be revised accordingly.
               </p>
             </section>
 
             {/* 7. Contact Us */}
-            <section className="bg-white rounded-lg shadow-sm border border-gray-200 p-8">
-              <h2 className="text-2xl font-bold text-gray-900 mb-4 flex items-center">
-                <span className="flex-shrink-0 w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-bold mr-3">7</span>
+            <section style={{ backgroundColor: theme.colors.card }} className="rounded-lg shadow-sm border border-gray-200 p-8">
+              <h2 style={{ color: theme.colors.text }} className="text-2xl font-bold mb-4 flex items-center">
+                <span style={{ backgroundColor: theme.colors.accent }} className="flex-shrink-0 w-8 h-8 text-white rounded-full flex items-center justify-center text-sm font-bold mr-3">7</span>
                 Contact Us
               </h2>
-              <p className="text-gray-700 leading-relaxed">
+              <p style={{ color: theme.colors.text + '80' }} className="leading-relaxed">
                 If you have any questions, concerns, or requests regarding your personal information, please contact us:
               </p>
-              <ul className="list-disc pl-6 text-gray-700 mt-2">
-                <li>Email: <a href="mailto:privacy@aiforge.com" className="text-blue-600 underline">privacy@aiforge.com</a></li>
+              <ul className="list-disc pl-6 mt-2" style={{ color: theme.colors.text + '80' }}>
+                <li>Email: <a href="mailto:privacy@aiforge.com" style={{ color: theme.colors.accent }} className="underline">privacy@aiforge.com</a></li>
                 <li>Phone: +91-XXXXXXXXXX</li>
                 <li>Address: AIForge Technologies, [Street Address], [City], [State], [Country]</li>
               </ul>
@@ -146,7 +146,7 @@ const PrivacyPolicy = () => {
 
           {/* Footer Note */}
           <div className="mt-12 text-center">
-            <p className="text-sm text-gray-500">
+            <p className="text-sm" style={{ color: theme.colors.text + '60' }}>
               This policy was last updated on {new Date().toLocaleDateString('en-US', {
                 year: 'numeric',
                 month: 'long',
