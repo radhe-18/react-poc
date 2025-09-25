@@ -152,7 +152,7 @@ const Contact = () => {
                       <label htmlFor="message" style={{ color: theme.colors.text }} className="block text-sm font-medium mb-2">Message *</label>
                       <textarea id="message" name="message" value={formData.message} onChange={handleChange} rows={5} className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 resize-none" placeholder="Tell us about your project or ask us anything..." required />
                     </div>
-                    <button type="submit" disabled={isSubmitting} style={{ background: `linear-gradient(to r, ${theme.colors.accent}, ${theme.colors.text})`, color: theme.colors.text, border: `2px solid ${theme.colors.accent}` }} className="w-full py-4 px-6 rounded-lg font-semibold hover:shadow-lg transform hover:scale-105 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none">
+                    <button type="submit" disabled={isSubmitting} style={{ backgroundColor: theme.colors.accent, color: '#ffffff' }} className="w-full py-4 px-6 rounded-lg font-semibold hover:shadow-lg transform hover:scale-105 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none">
                       {isSubmitting ? (
                         <div className="flex items-center justify-center">
                           <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">

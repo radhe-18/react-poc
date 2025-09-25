@@ -29,14 +29,8 @@ const ProductCard = ({ title, description, icon, category }: ProductCardProps) =
         <div className="mt-6 flex justify-between items-center">
           <button
             style={{
-              background:
-                theme.name === "dark"
-                  ? theme.colors.card
-                  : theme.name === "day"
-                  ? `linear-gradient(to r, ${theme.colors.accent}, ${theme.colors.text})`
-                  : `linear-gradient(to r, ${theme.colors.accent}, ${theme.colors.text})`,
-              color: theme.colors.text,
-              border: `2px solid ${theme.colors.accent}`,
+              backgroundColor: theme.colors.accent,
+              color: '#ffffff',
             }}
             className="px-8 py-4 rounded-lg font-semibold hover:shadow-lg hover:scale-105 transition-all duration-300"
           >
