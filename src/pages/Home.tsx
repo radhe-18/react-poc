@@ -176,10 +176,10 @@ const Home = () => {
 
 <Link
   to="./About"
-  style={{ border: `2px solid ${theme.colors.text}40`, backgroundColor: theme.colors.bg, color: theme.colors.accent }}
+  style={{ background: `linear-gradient(to r, ${theme.colors.accent}, ${theme.colors.text})`, color: theme.colors.text, border: `2px solid ${theme.colors.accent}` }}
   className="px-8 py-4 rounded-lg font-semibold hover:shadow-lg hover:scale-105 transition-all duration-300 inline-block text-center"
 >
-  Learn More
+  <span style={{ color: theme.colors.text }}>Learn More</span>
 </Link>
 
 

@@ -5,7 +5,7 @@ const Footer = () => {
   const { theme } = useTheme();
 
   return (
-    <footer style={{ background: `linear-gradient(to right, ${theme.colors.bg}, ${theme.colors.text})`, color: theme.colors.text }} className="mt-16 animate-fade-in">
+    <footer style={{ background: `linear-gradient(to right, ${theme.colors.bg}, ${theme.colors.accent})`, color: theme.colors.text }} className="mt-16 animate-fade-in">
       <div className="container mx-auto px-6 py-12">
         <div className="grid grid-cols-1 md:grid-cols-5 gap-8">
           <div className="animate-fade-in-up">

@@ -5,13 +5,16 @@ const ThemeToggle = () => {
 
   return (
     <div className="fixed top-4 right-4 flex gap-2 z-50">
-      {Object.keys({ gaming: 1, future: 1 }).map((name) => (
+      {Object.keys({ gaming: 1, futuristic: 1 }).map((name) => (
         <button
           key={name}
-          onClick={() => setThemeByName(name as "gaming" | "future")}
-          className={`px-4 py-2 rounded ${
-            theme.name === name ? "bg-accent text-white" : "bg-gray-800 text-gray-200"
-          }`}
+          onClick={() => setThemeByName(name as "gaming" | "futuristic")}
+          className="px-4 py-2 rounded"
+          style={{
+            backgroundColor: theme.name === name ? theme.colors.accent : theme.colors.bg,
+            color: theme.name === name ? theme.colors.bg : theme.colors.text + '80',
+            border: `2px solid ${theme.colors.accent}`
+          }}
         >
           {name}
         </button>
