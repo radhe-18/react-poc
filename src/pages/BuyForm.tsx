@@ -42,62 +42,66 @@ const BuyForm = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50">
-      <div className="bg-white rounded-2xl shadow-lg p-8 max-w-md w-full">
-        <h2 className="text-2xl font-bold mb-6 text-gray-900">Buy Product</h2>
+    <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: theme.colors.bg }}>
+      <div className="rounded-2xl p-8 max-w-md w-full" style={{ backgroundColor: theme.colors.card, boxShadow: theme.effects.cardShadow }}>
+        <h2 className="text-2xl font-bold mb-6" style={{ color: theme.colors.text }}>Buy Product</h2>
 
         {success && (
-          <div className="bg-green-100 text-green-800 p-3 rounded mb-4 text-center">
+          <div className="p-3 rounded mb-4 text-center" style={{ backgroundColor: theme.colors.accent + '10', color: theme.colors.accent }}>
             Your request has been submitted successfully!
           </div>
         )}
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-gray-700 mb-1">Name</label>
+            <label className="block mb-1" style={{ color: theme.colors.text + '80' }}>Name</label>
             <input
               type="text"
               name="name"
               value={form.name}
               onChange={handleChange}
               required
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2"
+              style={{ borderColor: theme.colors.text + '30', '--tw-ring-color': theme.colors.accent } as any}
             />
           </div>
           <div>
-            <label className="block text-gray-700 mb-1">Email</label>
+            <label className="block mb-1" style={{ color: theme.colors.text + '80' }}>Email</label>
             <input
               type="email"
               name="email"
               value={form.email}
               onChange={handleChange}
               required
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2"
+              style={{ borderColor: theme.colors.text + '30', '--tw-ring-color': theme.colors.accent } as any}
             />
           </div>
           <div>
-            <label className="block text-gray-700 mb-1">Company</label>
+            <label className="block mb-1" style={{ color: theme.colors.text + '80' }}>Company</label>
             <input
               type="text"
               name="company"
               value={form.company}
               onChange={handleChange}
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2"
+              style={{ borderColor: theme.colors.text + '30', '--tw-ring-color': theme.colors.accent } as any}
             />
           </div>
           <div>
-            <label className="block text-gray-700 mb-1">Message</label>
+            <label className="block mb-1" style={{ color: theme.colors.text + '80' }}>Message</label>
             <textarea
               name="message"
               value={form.message}
               onChange={handleChange}
               rows={3}
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2"
+              style={{ borderColor: theme.colors.text + '30', '--tw-ring-color': theme.colors.accent } as any}
             />
           </div>
           <button
             type="submit"
-            style={{ background: `linear-gradient(to r, ${theme.colors.accent}, ${theme.colors.text})`, color: theme.colors.text, border: `2px solid ${theme.colors.accent}` }}
+            style={{ backgroundColor: theme.colors.accent, color: '#ffffff', border: `1px solid ${theme.colors.accent}30` }}
             className="w-full px-6 py-3 rounded-lg font-medium hover:shadow-lg hover:scale-105 transition-all duration-300"
           >
             Submit

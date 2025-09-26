@@ -1,4 +1,5 @@
 import { useTheme } from "../theme/ThemeProvider";
+import { useNavigate } from "react-router-dom";
 
 type ProductCardProps = {
   title: string;
@@ -9,8 +10,9 @@ type ProductCardProps = {
 
 const ProductCard = ({ title, description, icon, category }: ProductCardProps) => {
   const { theme } = useTheme();
+  const navigate = useNavigate();
   return (
-    <div style={{ backgroundColor: theme.colors.bg, border: `1px solid ${theme.colors.text}20` }} className="rounded-xl shadow-sm hover:shadow-xl hover:scale-105 transition-all duration-300 ease-in-out cursor-pointer group overflow-hidden">
+    <div style={{ backgroundColor: theme.colors.bg, border: `1px solid ${theme.colors.text}20` }} className="rounded-xl shadow-sm hover:shadow-xl hover:scale-105 transition-all duration-300 ease-in-out cursor-pointer group overflow-hidden" onClick={() => navigate(`/product/${encodeURIComponent(title)}`)}>
       <div className="p-6">
         <div className="flex items-center justify-between mb-4">
           <div className="text-3xl">{icon || "🤖"}</div>
@@ -28,11 +30,15 @@ const ProductCard = ({ title, description, icon, category }: ProductCardProps) =
         </p>
         <div className="mt-6 flex justify-between items-center">
           <button
+            onClick={(e) => {
+              e.stopPropagation();
+              navigate(`/product/${encodeURIComponent(title)}`);
+            }}
             style={{
               backgroundColor: theme.colors.accent,
               color: '#ffffff',
             }}
-            className="px-8 py-4 rounded-lg font-semibold hover:shadow-lg hover:scale-105 transition-all duration-300"
+            className="px-8 py-4 rounded-lg font-semibold hover:shadow-lg hover:scale-105 transition-all duration-300 no-underline inline-block border-none cursor-pointer"
           >
             Learn More
           </button>

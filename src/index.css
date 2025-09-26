@@ -181,3 +181,29 @@ html.futuristic .theme-popup {
   from { filter: brightness(1); }
   to { filter: brightness(1.05); }
 }
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 5s linear infinite;
+}
+
+@keyframes scroll-images {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-scroll-images {
+  animation: scroll-images 5s linear infinite;
+}
